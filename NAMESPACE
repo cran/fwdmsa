@@ -1,0 +1,28 @@
+# useDynLib(mokken)
+
+export(
+fs.MSA,
+fs.MSA.n1
+)
+
+# used internally - not intended to be visible to users
+#  alpha
+#  check.data
+#  check.monotonicity
+#  check.monotonicity.fs
+#  coefH
+#  coefZ
+#  count
+#  memberR
+#  memberX
+#  observation.obj.func
+#  search.normal
+#  X.residual
+
+
+importFrom(graphics, plot)
+
+#S3method(summary, "monotonicity.class")
+
+S3method(plot, "fs.class")
+S3method(plot, "fs.n1.class")

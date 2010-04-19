@@ -1,0 +1,9 @@
+desc <- packageDescription("fwdmsa", fields= c("Date","Version"))
+year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", desc$Date)
+vers <- paste(desc$Version)
+citEntry(entry="Misc",
+title = paste("'fwdmsa' (Version ",vers,"): Forward search for Mokken scale analysis [computer software]",sep=""),
+author = personList(as.person("W. P. Zijlstra")),
+year = year,
+note = "Retrieved from http://cran.r-project.org/web/packages/fwdmsa/index.html",
+textVersion = paste("Zijlstra, W. P. (",year,"). fwdmsa (Version ",vers,"):  Forward search for Mokken scale analysis [computer software]. Retrieved from http://cran.r-project.org/web/packages/fwdmsa/index.html", sep=""))
