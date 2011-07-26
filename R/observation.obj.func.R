@@ -1,4 +1,4 @@
-observation.obj.func=function(residual,sample.step.res,initial.subsample.size){
+observation.obj.func <- function(residual,sample.step.res,initial.subsample.size){
 N <- dim(residual)[1]
 obj <- apply(residual^2,c(1,3),sum)
 min.exclude <- integer(0)
@@ -12,7 +12,7 @@ for(i in initial.subsample.size:(N-1)){
   m.obj[i] <- sort(obj[,i])[i]
   mplus1.obj[i] <- sort(obj[,i])[i+1]
   }
-obj.list=list(observation.obj=obj, min.excl=min.exclude, max.incl=max.include, m.obj=m.obj, mplus1.obj=mplus1.obj)
+obj.list <- list(observation.obj=obj, min.excl=min.exclude, max.incl=max.include, m.obj=m.obj, mplus1.obj=mplus1.obj)
 class(obj.list) <- "fs.class"
 return(obj.list)
 }

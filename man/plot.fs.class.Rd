@@ -97,9 +97,9 @@ Plot fs.class objects
 }
 
 \references{
-  Zijlstra, W. P., Van der Ark, L. A., and Sijtsma, K. (2010).
-  \emph{Robust Mokken scale analysis by means of the forward search algorithm for outlier detection}. 
-  Manuscript submitted for publication.
+  Zijlstra, W. P., Van der Ark, L. A., and Sijtsma, K. (2011).
+  Robust Mokken scale analysis by means of the forward search algorithm for outlier detection.
+   \emph{Multivariate Behavioral Research, 46}, 58-89.
  }
 
 \author{

@@ -13,8 +13,8 @@ The package conducts the Forward Search on test and questionnaire data, and show
 \tabular{ll}{
 Package: \tab fwdmsa\cr
 Type: \tab Package\cr
-Version: \tab 0.1\cr
-Date: \tab 2010-06-02\cr
+Version: \tab 0.2\cr
+Date: \tab 2011-07-26\cr
 License: \tab GPL Version 2 or later\cr
 }
 The package includes the functions
@@ -49,9 +49,9 @@ Mokken scale analysis in \pkg{R}.
 \emph{Journal of Statistical Software}.
 \url{http://www.jstatsoft.org}
 
-Zijlstra, W. P., Van der Ark, L. A., and Sijtsma, K. (2010).
-\emph{Robust Mokken scale analysis by means of the forward search algorithm for outlier detection}. 
-Manuscript submitted for publication.
+Zijlstra, W. P., Van der Ark, L. A., and Sijtsma, K. (2011).
+Robust Mokken scale analysis by means of the forward search algorithm for outlier detection.
+\emph{Multivariate Behavioral Research, 46}, 58-89.
  
 }
 
@@ -108,7 +108,7 @@ Manuscript submitted for publication.
 
 ## Second Forward Search Analysis
  # Remove bad items from the data
-   acs.min.core=acs.cont[-(589:618),-c(3,7,8,11,13,16)]
+   acs.min.core <- acs.cont[-(589:618),-c(3,7,8,11,13,16)]
  
  # Determining n1 = 302
    fs2.n1 <- fs.MSA.n1(acs.min.core, B=100)
@@ -128,7 +128,7 @@ Manuscript submitted for publication.
    plot(fs2, type="coefH", n0=TRUE, n1=302, n2=TRUE, ylim=c(.1,.8))
 
 ## What if influential observations were not removed from the data
-   acs.cont.core=acs.cont[,-c(3,7,8,11,13,16)]
+   acs.cont.core <- acs.cont[,-c(3,7,8,11,13,16)]
  # Determining n1 = 347
    fs3.n1 <- fs.MSA.n1(acs.cont.core, B=100)
    n1 <- fs3.n1$n1 

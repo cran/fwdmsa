@@ -15,7 +15,8 @@ fs.MSA(
  initial.subsample = "random", 
  initial.subsample.size = default.initial.subsample.size, 
  minsize = default.minsize, 
- seed = default.seed, 
+ seed = default.seed,
+ n.low = default.n.low,  
  verbose = TRUE)
 }
 
@@ -33,10 +34,11 @@ fs.MSA(
                                 If \code{initial.subsample} is not \code{"random"}, the size of the initial subsample equals the length of the vector provided at \code{initial.subsample}.} 
   \item{minsize}{Integer giving the minimum size of a rest score group. By default
         \code{minsize} = \eqn{N/10} if \eqn{N \ge 500};
-        \code{minsize} = \eqn{N/5 if} \eqn{250 \le N < 500}; and
+        \code{minsize} = \eqn{N/5} if \eqn{250 \le N < 500}; and
         \code{minsize} = max\eqn{(N/3,50)} if \eqn{N < 250}}      
-  \item{seed}{Numberic; fixes the random number generation \code{set.seed} in order to control the initial subsample. 
+  \item{seed}{Numeric; fixes the random number generation \code{set.seed} in order to control the initial subsample. 
               Default is a randomly drawn value between 1 and 10000.}
+  \item{n.low}{Numeric; \eqn{n2} should be larger than \code{n.low}. Default \code{n.low} = N/4.}
   \item{verbose}{Logical, indicating whether the subsample size should be printed on the screen. If \code{FALSE}, no output is produced. The default is \code{TRUE}.}        
 }
 
@@ -58,9 +60,9 @@ A large \code{initial.subsample.size} reduces the computation time but may affec
 }
 
 \references{
-  Zijlstra, W. P., Van der Ark, L. A., and Sijtsma, K. (2010).
-  \emph{Robust Mokken scale analysis by means of the forward search algorithm for outlier detection}. 
-  Manuscript submitted for publication.
+  Zijlstra, W. P., Van der Ark, L. A., and Sijtsma, K. (2011).
+  Robust Mokken scale analysis by means of the forward search algorithm for outlier detection.
+   \emph{Multivariate Behavioral Research, 46}, 58-89.
   
   Van der Ark, L. A. (2007). 
   Mokken scale analysis in \pkg{R}. 

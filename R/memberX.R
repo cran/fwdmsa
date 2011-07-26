@@ -1,9 +1,9 @@
-memberX=function(data,minsize){
+memberX <- function(data,minsize){
 #membership of observations to bins based on total score X
 #this function is needed to compute stable residuals forward search
-X.tot=apply(data,1,sum)
+X.tot <- apply(data,1,sum)
 sorted.R <- sort(X.tot)
-N=dim(data)[1]
+N <- dim(data)[1]
 group <- max(which(sorted.R == sorted.R[minsize]))
 repeat {
     if (N - max(group) < minsize)        break
@@ -12,7 +12,7 @@ repeat {
 group <- group[-length(group)]
 group <- c(sorted.R[group], max(sorted.R))
 L <- length(group)
-lo= c(min(sorted.R), group[-L] + 1)
+lo <- c(min(sorted.R), group[-L] + 1)
 member <- apply(1 - outer(X.tot, group, "<="), 1, sum) +    1
 return(member)
 }

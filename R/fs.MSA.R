@@ -2,23 +2,27 @@ fs.MSA <- function(X,
                    initial.subsample = "random", 
                    initial.subsample.size = default.initial.subsample.size, 
                    minsize = default.minsize, 
-                   seed = default.seed, 
+                   seed = default.seed,
+                   n.low = default.n.low,                                             #NEW# 
                    verbose = TRUE){
 
 #running the forward search for MSA
 #needs library(mokken)
 #needs functions:
+#check.data
 #memberX
 #memberR
 #X.residual
 #check.monotonicity.fs
 #alpha
 #observation.obj.func
-check.data(X)
+
+X <- check.data(X)								#NEW# 
 N <- dim(X)[1]
 J <- dim(X)[2]
 m <- max(X)
 data <- list(X=X, N=N, J=J, m=m)
+default.n.low <- N/4
 
   default.minsize <- ifelse(N > 500, floor(N/10), floor(N/5))
   default.minsize <- ifelse(N <= 250, floor(N/3), default.minsize)
@@ -32,8 +36,8 @@ member.Rscore <- memberR(X, minsize=minsize)
 
 if(is.numeric(initial.subsample)==FALSE){
  if(initial.subsample=="random"){
-  set.seed(seed)
-  default.initial.subsample.size <- min(member.Rscore$n.mono[1,])*J
+   set.seed(seed)
+   default.initial.subsample.size <- min(member.Rscore$n.mono[1,])*J
   repeat{
    samp <- sample(1:N, initial.subsample.size)
    tmp.r <- integer()
@@ -100,8 +104,9 @@ objective.excl[i,] <- c(objective.function$observation.obj[-subsample[,i],i], re
 obj.incl[i,] <- c(boxplot(objective.incl[i,], plot=F)$stats[4]- boxplot(objective.incl[i,],plot=F)$stats[2], boxplot(objective.incl[i,], plot=F)$stats[4])
 }
 tukey.upper.fence <- cbind(obj.incl[,2]+1.5*obj.incl[,1], obj.incl[,2]+3*obj.incl[,1])
-n2 <- min(which((tukey.upper.fence[,1]-objective.function$min.excl)<0))
-suspect <-  (1:N)[-subsample[,(n2)-1]]
+n2.temp <- which((tukey.upper.fence[,1]-objective.function$min.excl)<0)                            # NEW #
+n2 <- min(n2.temp[which(n2.temp > n.low)])                                                                    # NEW #
+suspect <-  (1:N)[-subsample[,n2]]      							# NEW 
 
 
 fs.output.list <- list(data=data,

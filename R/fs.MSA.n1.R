@@ -13,7 +13,7 @@ fs.MSA.n1 <- function(X,
 #X.residual
 #check.data
 
-check.data(X)
+X <- check.data(X)                                                                                              # NEW #
 N <- dim(X)[1]
 J <- dim(X)[2]
 m <- max(X)
@@ -27,14 +27,15 @@ if (N < minsize) stop("Sample size less than Minsize")
 member.Xscore <- memberX(X, minsize=minsize)
 member.Rscore <- memberR(X, minsize=minsize)
 
-default.seed <- round(runif(1,1,10000))
-set.seed(seed)
+default.seed <- sample(1:10000,B,replace=F)                                                                     # NEW #
+if(length(seed)==1 & length(seed)<B) default.seed <- sample(1:10000,B,replace=F)                                # NEW #
 default.initial.subsample.size <- min(member.Rscore$n.mono[1,])*J
 default.cutoff <- 5
 
 subsample <- matrix(,N,N)
 subsample.multi <- list()
 for(b in 1:B){
+ set.seed(seed[b])                                                                                             # NEW #
  repeat{
   samp <- sample(1:N, initial.subsample.size)
   tmp.r <- integer()
@@ -74,25 +75,37 @@ for(b in 1:B){
  if(verbose==TRUE)print(b)
 }
 
-subsample.member <- list()
-number.unique.subsample <- list()
+# NEW # 
+# NEW # 
+number.unique.subsample <- integer()
+id.unique.subsample <- matrix(,N,B)                                                                               
+number.major.subsample <- integer()
 for(i in initial.subsample.size:N){
- subsample.member[[i]] <- matrix(rep(0,N),N,B)
+ subsample.member <- matrix(rep(0,N),N,B)
  for(b in 1:B){
-  subsample.member[[i]][which(1:N %in% subsample.multi[[b]][,i]),b] <- 1
+  subsample.member[which(1:N %in% subsample.multi[[b]][,i]),b] <- 1
  }
-number.unique.subsample[[i]] <- length(table(apply(subsample.member[[i]],2,paste, collapse="")))
+ number.unique.subsample[i] <- length(table(apply(subsample.member,2,paste, collapse="")))
+ pattern <- apply(subsample.member,2,paste, collapse="")                                                   
+ for(j in 1:number.unique.subsample[i]){                                                                      
+  id.unique.subsample[i,which(pattern==names(sort(-table(pattern)))[j])] <- j                             
+ }                                                                                                             
+ number.major.subsample[i] <- sum(id.unique.subsample[i,]==1)      
 } 
-number.unique.subsample <- c(rep(NA,initial.subsample.size-1), unlist(number.unique.subsample))
-n1 <- min(which(number.unique.subsample < cutoff))
+n1.unique <- min(which(number.unique.subsample < cutoff))                                                        
+n1.major <- min(which((B-number.major.subsample+1) < cutoff))   
 
 fs.output.list <- list(data = data,
                        initial.subsample.size = initial.subsample.size, 
                        subsample.multi = subsample.multi, 
-                       number.unique.subsample = number.unique.subsample,
+                       number.unique.subsample = number.unique.subsample,                                       
+                       number.major.subsample = number.major.subsample,                                             # NEW #
+                       id.unique.subsample = id.unique.subsample,                                               # NEW #
                        B = B,
+                       seed = seed,                                                                              # NEW # 
                        cutoff = cutoff,
-                       n1 = n1)
+                       n1.unique = n1.unique,                                                                   # NEW #
+                       n1.major = n1.major)                                                                         # NEW #
 class(fs.output.list) <- "fs.n1.class"
 return(fs.output.list)
 }

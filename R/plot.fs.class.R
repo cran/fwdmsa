@@ -234,7 +234,7 @@ function(x,
      for(j in items){
       devAskNewPage(ask = TRUE)
       plot(x$monotonicity[[step]]$results[[j]][[2]][,10], type="b", ylim=ylim, xlim=c(1,dim(x$monotonicity[[N]]$results[[j]][[2]])[1]), pch=19, ylab="", xlab="", las=1, lty=lty, lwd=lwd, col=col, cex=1, xaxt="n", main=x$monotonicity[[N]]$I.labels[j])
-      title(ylab=expression(italic(paste(bar(X)[j]," | ",R[(-j)],sep=" "))), cex.lab=1.2, line=2)
+      title(ylab=expression(italic(paste(bar(X)[j]," | ",R[(j)],sep=" "))), cex.lab=1.2, line=2)                                                            # NEW: R[(j)] ipv R[(-j)] #
       title(xlab=paste("Rest score group item",x$monotonicity[[N]]$results[[j]][1]), line=3)
       for(l in 1:dim(x$monotonicity[[N]]$results[[j]][[2]])[1]){
        axis(1, at=l, labels=paste(x$monotonicity[[N]]$results[[j]][[2]][l,2], "-", x$monotonicity[[N]]$results[[j]][[2]][l,3], sep=""), tick=TRUE, padj=-.5)
@@ -279,7 +279,7 @@ function(x,
      irf.mono <- matrix(, x$member.Rscore$n.mono[1,j], N)
      for(i in x$initial.subsample.size:N){irf.mono[,i] <- x$monotonicity[[i]]$results[[j]][[2]][,k]}
      devAskNewPage(ask = TRUE)
-     plot(NA, ylim=ylim, xlim=xlim, xlab="Subsample size n", ylab=expression(italic(paste(bar(X)[j]," | ",R[(-j)],sep=" "))), main=x$monotonicity[[N]]$I.labels[j], las=1)
+     plot(NA, ylim=ylim, xlim=xlim, xlab="Subsample size n", ylab=expression(italic(paste(bar(X)[j]," | ",R[(j)],sep=" "))), main=x$monotonicity[[N]]$I.labels[j], las=1)  # NEW: R[(j)] ipv R[(-j)] #
      if(n0==TRUE){axis(1, at=x$initial.subsample.size, labels=expression(italic(n[0])), tick=TRUE, padj=-1.3, cex.axis=1)}
      if(is.numeric(n1)==TRUE){axis(1, at=n1, labels=expression(italic(n[1])), tick=TRUE, padj=-1.3, cex.axis=1)}
      if(n2==TRUE){axis(1, at=x$n2, labels=expression(italic(n[2])), tick=TRUE, padj=-1.3, cex.axis=1)}

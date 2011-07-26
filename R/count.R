@@ -6,9 +6,9 @@ count =
 # > y
 # [1] 2  3
 function(x, elm=sort(unique(x))){
-  j = 0;  res = 0
+  j <- 0;  res <- 0
   if(any(is.na(x)))stop("data contain missing values")
-  unique.elm = unique(elm)
+  unique.elm <- unique(elm)
   for (j in 1:length(unique.elm))res[j] = length(x[x==unique.elm[j]])
   return(res)
 }

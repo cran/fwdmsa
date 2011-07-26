@@ -33,9 +33,9 @@ fs.MSA.n1(
                                 By default \code{initial.subsample.size} equals the minimum of the number of restscore groups over all items multiplied by the number of items.}
   \item{minsize}{Integer giving the minimum size of a rest score group. By default
         \code{minsize} = \eqn{N/10} if \eqn{N \ge 500};
-        \code{minsize} = \eqn{N/5 if} \eqn{250 \le N < 500}; and
+        \code{minsize} = \eqn{N/5} if \eqn{250 \le N < 500}; and
         \code{minsize} = max\eqn{(N/3,50)} if \eqn{N < 250}}
-  \item{seed}{Numberic; fixes the random number generation \code{set.seed} in order to control the initial subsample.
+  \item{seed}{Numeric; fixes the random number generation \code{set.seed} in order to control the initial subsample.
               Default is a randomly drawn value between 1 and 10000.}
   \item{verbose}{Logical, indicating whether \code{B} should be printed on the screen. If \code{FALSE}, no output is produced. The default is \code{TRUE}.}
 }
@@ -53,9 +53,9 @@ Large values of \code{B} may take much computation time.
 }
 
 \references{
-  Zijlstra, W. P., Van der Ark, L. A., and Sijtsma, K. (2010).
-  \emph{Robust Mokken scale analysis by means of the forward search algorithm for outlier detection}.
-  Manuscript submitted for publication.
+  Zijlstra, W. P., Van der Ark, L. A., and Sijtsma, K. (2011).
+  Robust Mokken scale analysis by means of the forward search algorithm for outlier detection.
+   \emph{Multivariate Behavioral Research, 46}, 58-89.
  }
 
 \author{
